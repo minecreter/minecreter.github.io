@@ -1,0 +1,116 @@
+﻿<!DOCTYPE HTML>
+<html lang="ko-KR">
+<head>
+	<meta charset="utf-8">
+	<title data-vue-meta="true">메알람</title>
+	<meta name="title" content="메알람">
+	<meta data-vue-meta="true" data-vmid="description" name="description" content="메이플스토리 알람"/>
+	<meta name="keywords" content="maple, maplestory, 메이플, 메이플스토리, 알람, 메알람, MapleAlarm">
+    <style>
+        body {
+            text-align: center;
+            background: #ffe0b2;
+            font-family: sans-serif;
+            font-weight: 100;
+        }
+
+        h1 {
+            color: #ef6c00;
+            font-weight: 100;
+            font-size: 40px;
+            margin: 40px 0px 20px;
+        }
+
+        #minutes {
+            background-color: white;
+            border: 1px #ef6c00;
+            border-radius: 10px;
+            display: inline-block;
+            font: inherit;
+            line-height: 1.5em;
+            padding: 0.5em 3.5em 0.5em 1em;
+
+            margin: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+
+
+            background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+            linear-gradient(135deg, gray 50%, transparent 50%),
+            radial-gradient(#ddd 70%, transparent 72%);
+            background-position: calc(100% - 20px) calc(1em + 2px),
+            calc(100% - 15px) calc(1em + 2px),
+            calc(100% - .5em) .5em;
+            background-size: 5px 5px,
+            5px 5px,
+            1.5em 1.5em;
+            background-repeat: no-repeat;
+        }
+        #button {
+            width:100px;
+            background-color: #ef6c00;
+            border: none;
+            color:#fff;
+            padding: 15px 0;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 4px;
+            cursor: pointer;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+<h1>메이플스토리 알람 :: 메알람 (경뿌알리미)</h1>
+<div id="clockdiv">
+    <label>
+        <select name="minutes" id="minutes" required autofocus>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+        </select>
+        <button id="button" onclick="gotoNode()">button</button>
+    </label>
+</div>
+
+<script type="text/javascript">
+    function gotoNode(){
+        var data = document.getElementById("minutes").value;
+        window.open('/maplestory_alarm/maplestory_alarm.html?val='+data,'메알람','width=430,height=300,location=no,status=no, menubar=no titlebar=no toolbar=no');
+    }
+</script>
+
+</body>
+</html>

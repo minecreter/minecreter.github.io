@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html lang="ko-KR">
+<meta charset="utf-8">
+<head>
+    <style>
+        body {
+            text-align: center;
+            background: #ffe0b2;
+            font-family: sans-serif;
+            font-weight: 100;
+        }
+
+        h1 {
+            color: #ef6c00;
+            font-weight: 100;
+            font-size: 40px;
+            margin: 40px 0px 20px;
+        }
+
+        #clockdiv {
+            font-family: sans-serif;
+            color: #fff;
+            display: inline-block;
+            font-weight: 100;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        #clockdiv > div {
+            padding: 10px;
+            border-radius: 3px;
+            background: #ff9800;
+            display: inline-block;
+        }
+
+        #clockdiv div > span {
+            padding: 15px;
+            border-radius: 3px;
+            background: #e65100;
+            display: inline-block;
+        }
+
+        smalltext {
+            padding-top: 5px;
+            font-size: 16px;
+        }
+
+    </style>
+    <title>메알람</title>
+</head>
+<body>
+<h1>메알람</h1>
+<div id="clockdiv">
+    <div>
+        <span class="minutes" id="minute"></span>
+        <div class="smalltext">Minutes</div>
+    </div>
+    <div>
+        <span class="seconds" id="second"></span>
+        <div class="smalltext">Seconds</div>
+    </div>
+</div>
+
+<iframe id="audio" allow="autoplay" style="display:none"></iframe>
+
+<audio preload="auto" id="playAudio">
+    <source src="/maplestory_alarm/angelicbuster11.ogg" type="audio/ogg">
+    <source src="/maplestory_alarm/angelicbuster11.mp3" type="audio/mpeg">
+    이 브라우저는 Audio를 지원하지 않습니다.
+</audio>
+
+<script>
+
+    function _GET(search) {
+        var obj = {};
+        var uri = decodeURI(search);
+        uri = uri.slice(1, uri.length);
+
+        var param = uri.split('&');
+
+        for (var i = 0; i < param.length; i++) {
+            var devide = param[i].split('=');
+            obj[devide[0]] = devide[1];
+        }
+
+        return obj;
+    }
+
+    var agent = navigator.userAgent.toLowerCase();
+
+    if (agent.indexOf("chrome") !== -1) {
+        var innerFrame = document.getElementById('audio');
+        innerFrame.src = "http://ec2-52-79-205-251.ap-northeast-2.compute.amazonaws.com/silence.mp3";
+    }
+    var deadline = new Date();
+    var search = window.location.search;
+    var getData = _GET(search);
+    value = Number(getData.val);
+
+    deadline.setMinutes(value);
+
+    while (deadline.getMilliseconds() < new Date().getMilliseconds()) {
+        deadline.setMinutes(deadline.getMinutes() + 30)
+    }
+    deadline.setSeconds(0);
+
+    var x = setInterval(function () {
+        timer()
+    }, 100);
+
+    function timer() {
+        var now = new Date().getTime();
+        var t = deadline - now;
+        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((t % (1000 * 60)) / 1000);
+        document.getElementById("minute").innerHTML = minutes;
+        document.getElementById("second").innerHTML = seconds;
+        if (t < 0) {
+            document.getElementById("minute").innerHTML = '0';
+            document.getElementById("second").innerHTML = '0';
+            document.getElementById('playAudio').play();
+            deadline.setMinutes(deadline.getMinutes() + 30);
+        }
+    }
+</script>
+</body>
+</html>
