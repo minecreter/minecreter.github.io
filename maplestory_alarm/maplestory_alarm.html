@@ -1,7 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="ko-KR">
-<meta charset="utf-8">
 <head>
+	<meta charset="utf-8">
+	<title data-vue-meta="true">메알람</title>
+	<meta name="title" content="메알람">
+	<meta data-vue-meta="true" data-vmid="description" name="description" content="메이플스토리 알람"/>
+	<meta name="keywords" content="maple, maplestory, 메이플, 메이플스토리, 알람, 메알람, MapleAlarm">
     <style>
         body {
             text-align: center;
@@ -64,8 +68,8 @@
 <iframe id="audio" allow="autoplay" style="display:none"></iframe>
 
 <audio preload="auto" id="playAudio">
-    <source src="/maplestory_alarm/angelicbuster11.ogg" type="audio/ogg">
-    <source src="/maplestory_alarm/angelicbuster11.mp3" type="audio/mpeg">
+    <source src="./angelicbuster11.ogg" type="audio/ogg">
+    <source src="./angelicbuster11.mp3" type="audio/mpeg">
     이 브라우저는 Audio를 지원하지 않습니다.
 </audio>
 
@@ -90,19 +94,21 @@
 
     if (agent.indexOf("chrome") !== -1) {
         var innerFrame = document.getElementById('audio');
-        innerFrame.src = "http://ec2-52-79-205-251.ap-northeast-2.compute.amazonaws.com/silence.mp3";
+        innerFrame.src = "./maplestory_alarm/silence.mp3";
     }
     var deadline = new Date();
     var search = window.location.search;
     var getData = _GET(search);
-    value = Number(getData.val);
+    minutes = Number(getData.m);
+	seconds = Number(getData.s);
 
-    deadline.setMinutes(value);
+    deadline.setMinutes(minutes);
+
 
     while (deadline.getMilliseconds() < new Date().getMilliseconds()) {
         deadline.setMinutes(deadline.getMinutes() + 30)
     }
-    deadline.setSeconds(0);
+	deadline.setSeconds(seconds);
 
     var x = setInterval(function () {
         timer()
